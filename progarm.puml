@@ -1,0 +1,59 @@
+@startuml
+class GpuSpec {
+    -string model
+    -int cudaCores
+    -float frequency
+    +void Print()
+    +void Import(string filePath)
+    +void Export(string filePath)
+}
+
+class CpuSpec {
+    -string model
+    -int cores
+    -float frequency
+    +void Print()
+    +void Import(string filePath)
+    +void Export(string filePath)
+}
+
+class RamSpec {
+    -string model
+    -int sizeGB
+    -string type
+    +void Print()
+    +void Import(string filePath)
+    +void Export(string filePath)
+}
+
+class LanSpec {
+    -string model
+    -float speedGbps
+    +void Print()
+    +void Import(string filePath)
+    +void Export(string filePath)
+}
+
+class ClusterNode {
+    -CpuSpec cpu
+    -GpuSpec gpu
+    -RamSpec ram
+    -LanSpec lan
+    +void Print()
+    +void Import(string filePath)
+    +void Export(string filePath)
+}
+
+class Cluster {
+    -list<ClusterNode> nodes
+    +void Print()
+    +void Import(string filePath)
+    +void Export(string filePath)
+}
+
+ClusterNode "1" -- "*" GpuSpec
+ClusterNode "1" -- "*" CpuSpec
+ClusterNode "1" -- "*" RamSpec
+ClusterNode "1" -- "*" LanSpec
+Cluster "1" -- "*" ClusterNode
+@enduml
